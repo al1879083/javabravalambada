@@ -1,118 +1,94 @@
-// Assignment code here
+//var upperCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+var upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+//var lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y','z'];
+var lower = 'abcdefghijklmnopqrstuvwxyz';
+//var numberCase = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+var number = '0123456789'
+//var specialSymbol= ['@', '$', '%', '^', '*', '!', '?', '+', '#', '&', '`', '~', '(', ')', '{', '}', '.'];
+var symbol = '!@#$%^&*()_'
 
-//lowercase
-//
-//uppercase 
-//
-
-//numbers
-//
-
-//var specialCharacters = ['@', '$', '%', '^', '*', '!', '?', '+', '#', '&', '`', '~', '(', ')', '{', '}', '.'];
-
-//var allChar = specialCharacters + numberCase + lowerCase + upperCase
-
-//lengh of password 
-
-//function passwordSteps() {
-    //var number = 0
-
-//if no u,l, n or s is inputed request valid option 
-//else {alert ("Please enter a valid option");passwordOptions(); }}
-
-//funtion pass}
-var upperCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-///var upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-var lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y','z'];
-//var lower = 'abcdefghijklmnopqrstuvwxyz';
-var numberCase = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-//var number = '0123456789'
-var specialSymbol= ['@', '$', '%', '^', '*', '!', '?', '+', '#', '&', '`', '~', '(', ')', '{', '}', '.'];
-//var symbol = '!@#$%^&*()_'
+// Pool of all usable characters
+var characterPool = '';
 
 var specialCharacters = '';
-var numberValue = ;
+var numberValue = '';
+var password = 'h';
 var passwordText = document.querySelector ("#password");
 
+// Function used to generate password
 function  generatePassword () {
-    quantityCharacters();
-    
-    for (i = 0; i < quantityCharacters; i++) {
-        console.log (specialCharacters.length);
-        //Math.floor (Math.random ()*specialCharacters.length + 1);
-        //specialCharacters.substring(i) +=passwordText.value;
-    }
-}
-    console.log(passwordText.value);
+    // Determine length of password from user
+   var passLength = quantityCharacters();
+
+   // Determine the avaiable pool of characters
+   
+   // Loop however many times the user inputs.
+   for (i = 0; i < passLength - 1; i++){
+       var random = Math.floor(Math.random() * characterPool.length);
+       password += characterPool[random];
+   }
+   return password;
+
 }
 
-function quantityCharacters () {
-    specialCharacters = prompt ("Enter the amount of characters preffered? Enter number amount too, please?");
+function quantityCharacters (){
+    specialCharacters = prompt ("Please enter a number between '8' and '128'");
     console.log(parseInt(specialCharacters));
     if (specialCharacters >= 8 && specialCharacters <= 128) {
-        passwordOptions ();
+        //passwordOptions ();
+        return specialCharacters
     }
     else {
         alert('Enter valid option');
         quantityCharacters();
     }
 }
+function lowerPool(){
+    lowerPool = prompt ("Do you want lowercase letters? [y/n]")
+    switch (lowerPool){
+        case 'y': characterPool +=lower;return;
+        case 'n': return
+        alert('Enter valid option');
+        lowerPool();
 
-function passwordOptions () {
-    var passOptWant = prompt ('What random characters would you like to generate in your password? Please enter a number between "0" and "128", ')
-    passOptWant = passOptWant.toLowerCase();
-
-    var great = ('Thank you. Password will generate shortly');
-    var u = passOptWant.includes('u');
-    var l = passOptWant.incudles('l');
-    var n = passOptWant.includes('n');
-    var s = passOptWant.includes('s');
-
-    if (u) {
-        alert(great);
-        specialCharacters.push(upper);
-    if (l){
-        specialCharacters = specialCharacters + lowerCase;
-        if (n) {
-            specialCharacters = specialCharacters + upperCase;
-            if (s) {
-                specialCharacters = specialCharacters + specialSymbol;
-            }
-        }
-        else if (s) {
-            specialSymbol = specialSymbol + specialSymbol;
-        }
-    }   
-    else if (n) {
-        specialCharacters = specialCharacters + numberCase;
-        
-        if (s) {
-            specialCharacters = specialCharacters + specialSymbol;
-        }
     }
-    else if (s) {
-        specialCharacters = specialCharacters + specialSymbol;
+}
+function upperPool(){
+    upperPool = prompt ("Do you want uppercase letters? [y/n]")
+    switch (upperPool){
+        case 'y': characterPool +=upper;return;
+        case 'n': return
+        alert('Enter valid option');
+        upperPool();
+
     }
 }
 
-// if not u but l is inputed
-else if (l) {
-    alert (great);
-    specialCharacters = specialCharacters + lowerCase;
-    if (n) {
-        specialCharacters = specialCharacters + numberCase;
-        if (s) {
-            specialCharacters = specialCharacters + specialSymbol;
-        }
-    }
-    else if (s) {
-        specialCharacters = specialCharacters + specialSymbol;
+function numberPool(){
+    numberPool = prompt ("Do you want a number? [y/n]")
+    switch (numberPool){
+        case 'y': characterPool +=number;return;
+        case 'n': return
+        alert('Enter valid option');
+        numberPool();
+
     }
 }
 
-else if (n) {
-    
+function symbolPool(){
+    symbolPool = prompt ("Do you want a symbol? [y/n]")
+    switch (symbolPool){
+        case 'y': characterPool +=symbol;return;
+        case 'n': return
+        alert('Enter valid option');
+        symbolPool();
+
+    }
 }
+
+
+
+
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
